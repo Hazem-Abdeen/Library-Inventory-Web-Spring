@@ -42,7 +42,8 @@ public class BookDAOImpl implements BookDAO {
         return list;
     }
 
-    public void deleteBook(int id) {
+    public void deleteBookById(int id) {
+        System.out.println("Deleting book IMP with id: " + id);
         EntityManager em = emf.createEntityManager();
         Book book = em.find(Book.class, id);
         if (book != null) {

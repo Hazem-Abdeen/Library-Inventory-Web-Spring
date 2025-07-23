@@ -20,9 +20,6 @@ public class LoginBean implements Serializable {
 
     public String login() {
 
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-
         user = authService.authenticate(username, password);
         if (user != null) {
             return "books.xhtml?faces-redirect=true";

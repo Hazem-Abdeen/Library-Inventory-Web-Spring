@@ -12,11 +12,11 @@
 
         <h:outputLabel for="username" value="Username:" />
         <h:inputText id="username" value="#{loginBean.username}" required="true" />
-        <br/>
+        <br/><br/>
 
         <h:outputLabel for="password" value="Password:" />
         <h:inputSecret id="password" value="#{loginBean.password}" required="true" />
-        <br/>
+        <br/><br/>
 
         <h:commandButton value="Login" action="#{loginBean.login}" />
         <h:messages globalOnly="true" />

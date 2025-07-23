@@ -1,12 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
+      xmlns:f="http://java.sun.com/jsf/core">
 
-    <h1>Welcome to book.xhtml</h1>
-</f:view>
+<h:head><title>Books</title></h:head>
+<h:body>
+
+    <h:form>
+
+        <h3>Add Book</h3>
+        <h:outputLabel value="Title:"/>
+        <h:inputText value="#{bookBean.book.title}" required="true"/><br/><br/>
+
+        <h:outputLabel value="Author:"/>
+        <h:inputText value="#{bookBean.book.author}" required="true"/><br/><br/>
+
+        <h:outputLabel value="Year:"/>
+        <h:inputText value="#{bookBean.book.year}" required="true"/><br/><br/>
+
+        <h:commandButton value="Add" action="#{bookBean.addBook}"/><br/>
+
+    </h:form>
+
+    <h:form>
+
+        <h3>Delete Book</h3>
+        <h:outputLabel for="bookId" value="Book ID to delete:" /><br/>
+        <h:inputText id="bookId" value="#{bookBean.bookId}" required="true" /><br/><br/>
+        <h:commandButton value="Clear" action="#{bookBean.deleteBook}"/>
+
+    </h:form>
+
+
+    <hr/>
+
+    <h:dataTable value="#{bookBean.books}" var="b" border="1">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{b.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Title</f:facet>
+            #{b.title}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Author</f:facet>
+            #{b.author}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Year</f:facet>
+            #{b.year}
+        </h:column>
+    </h:dataTable>
+
+</h:body>
 </html>

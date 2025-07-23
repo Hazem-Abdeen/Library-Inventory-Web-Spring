@@ -1,37 +1,44 @@
-/*
 package org.eastnets.bean;
 
-import jakarta.faces.bean.ManagedBean;
-import jakarta.faces.bean.RequestScoped;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 import org.eastnets.model.Book;
 import org.eastnets.service.BookService;
-
+import java.io.Serializable;
 import java.util.List;
 
-@ManagedBean
-@RequestScoped
-public class BookBean {
+@Named("bookBean")
+@ViewScoped
+public class BookBean implements Serializable {
 
     private Book book = new Book();
     private final BookService bookService = new BookService();
 
-    public String addBook() {
-        bookService.addBook(book);
-        book = new Book(); // reset the form
-        return "books.xhtml?faces-redirect=true";
+    private int bookId;
+
+    public int getBookId() {
+        return bookId;
     }
 
-    public List<Book> getAllBooks() {
+    public void setBookId(int bookId) { this.bookId = bookId;}
+
+    public void deleteBook() {
+        System.out.println("Deleting book BEAN with ID: " + bookId);
+        bookService.deleteBook(bookId);
+    }
+
+    public List<Book> getBooks() {
         return bookService.getAllBooks();
     }
 
-    // Getters and Setters
-    public Book getBook() {
-        return book;
+    public String addBook() {
+        System.out.println("Adding book: ");
+        bookService.addBook(book);
+        book = new Book(); // Reset form
+        return null; // Stay on the same page
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
+    public Book getBook() { return book; }
+    public void setBook(Book book) { this.book = book; }
+
 }
-*/

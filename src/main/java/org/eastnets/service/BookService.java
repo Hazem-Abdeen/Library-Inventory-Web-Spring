@@ -3,7 +3,6 @@ package org.eastnets.service;
 import org.eastnets.dao.BookDAO;
 import org.eastnets.dao.BookDAOImpl;
 import org.eastnets.model.Book;
-
 import java.util.List;
 
 public class BookService {
@@ -38,16 +37,29 @@ public class BookService {
     }
 
     public void deleteBook(int id) {
+        System.out.println("Deleting book SERVICE with ID: " + id);
         if (id > 0) {
-            bookDAO.deleteBook(id);
+            bookDAO.deleteBookById(id);
         }
     }
 
     private boolean validate(Book book) {
-        return book != null &&
-                book.getTitle() != null && !book.getTitle().isBlank() &&
-                book.getAuthor() != null && !book.getAuthor().isBlank() &&
-                book.getQuantity() > 0 &&
-                book.getYear() > 0;
+        if (book == null) {
+            return false;
+        }
+
+        if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+            System.out.println("Validation failed: Title is required.");
+            return false;
+        }
+
+        if (book.getAuthor() == null || book.getAuthor().trim().isEmpty()) {
+            System.out.println("Validation failed: Author is required.");
+            return false;
+        }
+
+        return true;
     }
+
+
 }

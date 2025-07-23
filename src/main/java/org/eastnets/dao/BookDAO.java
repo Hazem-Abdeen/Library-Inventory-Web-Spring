@@ -9,6 +9,6 @@ public interface BookDAO {
     List<Book> viewBooks();
     List<Book> searchBookByTitle(String title);
     List<Book> searchBookByAuthor(String author);
-    void deleteBook(int id);
+    void deleteBookById(int id);
 
 }
