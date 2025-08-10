@@ -1,17 +1,22 @@
 package org.eastnets.bean;
 
-import jakarta.faces.view.ViewScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.eastnets.model.Book;
 import org.eastnets.service.BookService;
 import java.io.Serializable;
 import java.util.List;
 
+@SessionScoped
 @Named("bookBean")
-@ViewScoped
 public class BookBean implements Serializable {
 
+    @Inject
+    private LoginBean loginBean;
+
     private Book book = new Book();
+
     private final BookService bookService = new BookService();
 
     private int bookId;
@@ -22,20 +27,17 @@ public class BookBean implements Serializable {
 
     public void setBookId(int bookId) { this.bookId = bookId;}
 
-    public void deleteBook() {
-        System.out.println("Deleting book BEAN with ID: " + bookId);
-        bookService.deleteBook(bookId);
-    }
+    public void deleteBook() { bookService.deleteBook(bookId); }
 
     public List<Book> getBooks() {
-        return bookService.getAllBooks();
+        return bookService.getBooksByUser(loginBean.getUser());
     }
 
-    public String addBook() {
-        System.out.println("Adding book: ");
+     public void addBook() {
+        book.setUser(loginBean.getUser());
         bookService.addBook(book);
         book = new Book(); // Reset form
-        return null; // Stay on the same page
+
     }
 
     public Book getBook() { return book; }

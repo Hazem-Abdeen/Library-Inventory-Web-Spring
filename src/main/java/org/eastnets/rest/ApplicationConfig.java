@@ -1,8 +1,14 @@
 package org.eastnets.rest;
 
-import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
-@ApplicationPath("/api")  // All your REST APIs will start with /api
-public class ApplicationConfig extends Application {
+import jakarta.ws.rs.ApplicationPath;
+
+@ApplicationPath("/api")
+public class ApplicationConfig extends ResourceConfig {
+    public ApplicationConfig() {
+        packages("org.eastnets.rest");
+        register(JacksonFeature.class);
+    }
 }

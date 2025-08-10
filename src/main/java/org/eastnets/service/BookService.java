@@ -3,6 +3,8 @@ package org.eastnets.service;
 import org.eastnets.dao.BookDAO;
 import org.eastnets.dao.BookDAOImpl;
 import org.eastnets.model.Book;
+import org.eastnets.model.User;
+
 import java.util.List;
 
 public class BookService {
@@ -41,6 +43,13 @@ public class BookService {
         if (id > 0) {
             bookDAO.deleteBookById(id);
         }
+    }
+        public List<Book> getBooksByUser(User user){
+        if (user == null) {
+            System.out.println("User is null, cannot retrieve books.");
+            return List.of();
+        }
+        return bookDAO.getBooksByUser(user);
     }
 
     private boolean validate(Book book) {

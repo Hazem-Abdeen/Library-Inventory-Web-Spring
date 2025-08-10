@@ -10,6 +10,6 @@ public class AuthService {
 
     public User authenticate(String username, String password) {
         // You can add extra logic here later (e.g., log attempts, hash password, etc.)
-        return userDAO.findByUsernameAndPassword(username, password);
+        return userDAO.findByCredentials(username, password);
     }
 }

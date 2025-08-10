@@ -2,7 +2,6 @@ package org.eastnets.rest;
 
 import org.eastnets.model.Book;
 import org.eastnets.service.BookService;
-
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
@@ -21,6 +20,8 @@ public class BookResource {
 
     @POST
     public void addBook(Book book) {
+        System.out.println("POST /api/books was called");
+        System.out.println("Received book: " + book.getTitle());
         bookService.addBook(book);
     }
 
